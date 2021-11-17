@@ -4,6 +4,7 @@
     background-color : #0e8f8d;
 
 }
+/* For Main Div Container*/
 .center {
   margin: auto;
   margin-top : 80px;
@@ -14,6 +15,7 @@
   border-radius : 8px;
   padding: 20px;
 }
+/* For Title in Div */
 #heading{
     text-align : center;
     font-weight : bold;

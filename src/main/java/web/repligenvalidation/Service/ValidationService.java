@@ -17,6 +17,8 @@ public interface ValidationService {
         ExceptionEntity exceptionEntity = new ExceptionEntity();
         InputStream inputStream = multiPartFile.getInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        //All variable define
         int lineNumber = 0;
         String exceptionName = null;
         String fileName;
@@ -28,8 +30,11 @@ public interface ValidationService {
         Map<Integer, String> map = new HashMap<>();
         int currentLine = 0, previousPosition;
         int beginIndex= 0, endIndex=0;
+
+        //FileName of particular file
         fileName = multiPartFile.getOriginalFilename();
         System.out.println(fileName);
+
         while((line = bufferedReader.readLine())!=null) {
             currentLine++;
             map.put(currentLine, line);
@@ -40,12 +45,16 @@ public interface ValidationService {
                 uuid = line.substring(line.indexOf(":") + 3);
             }
             if (line.contains("Exception")) {
+
+                //Store Exception Name
                 exceptionName = line;
                 System.out.println(exceptionName);
+
+                //Store Line number
                 lineNumber = currentLine;
                 System.out.println(lineNumber);
 
-                //For Anchor(Unique Exception)
+                //For Anchor(Exception Definition)
                 beginIndex = line.lastIndexOf("Exception");
                 endIndex = beginIndex + 9;
                 if (line.length() == endIndex || line.charAt(endIndex) == '.' || line.charAt(endIndex) == ':'
@@ -59,6 +68,7 @@ public interface ValidationService {
                         break;
                     }
                 }
+                //Store Unique Exception
                 anchor = line.substring(beginIndex + 1, endIndex);
 
                 // To read previous 25 lines from the current exception

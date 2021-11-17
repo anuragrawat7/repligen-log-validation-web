@@ -33,16 +33,20 @@ public class ValidationController {
         return "KFComm2DebuggerApplication";
     }
 
+    //This POST method is used to add Exception Log data into Database.
     @PostMapping(value = "/debug", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> addException(ExceptionEntity exceptionEntity, @RequestPart(value = "folder",required = true)
+    public ResponseEntity<String> addExceptionIntoDB(ExceptionEntity exceptionEntity, @RequestPart(value = "folder",required = true)
             MultipartFile[] multipartFiles) throws IOException {
 
+        //Read the file one by one
         for(MultipartFile multiPartFile:multipartFiles){
             InputStream inputStream = multiPartFile.getInputStream();
             BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while((line = bufferedReader.readLine())!=null){
+
                 if (line.contains("Exception")) {
+                    //read only those file have which have Exception keyword.
                     exceptionEntity = ValidationService.readLogFile(multiPartFile);
                     break;
                 }
