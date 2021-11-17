@@ -1,0 +1,120 @@
+@startuml 
+class web.repligenvalidation.Service.ServiceImpl.ValidationServiceImpl{
+- web.repligenvalidation.Repository.ValidationRepo validationRepo
++ void ValidationServiceImpl (ValidationRepo )
++ void addExceptionLog (ExceptionEntity )
+}
+interface web.repligenvalidation.Service.ValidationService {
++ web.repligenvalidation.Entities.ExceptionEntity readLogFile (MultipartFile )
++ void addExceptionLog (ExceptionEntity )
+}
+web.repligenvalidation.Service.ValidationService <|.. web.repligenvalidation.Service.ServiceImpl.ValidationServiceImpl
+class web.repligenvalidation.Entities.ExceptionEntity{
+- int LogId
+- java.util.Date TIMESTAMP
+- java.lang.Integer LineNumber
+- java.lang.String ExceptionName
+- java.lang.String FILENAME
+- java.lang.String Anchor
+- java.lang.String ExpectionLines
+- java.lang.String Version
+- java.lang.String UUID
++ int getLogId ()
++ java.util.Date getTIMESTAMP ()
++ java.lang.Integer getLineNumber ()
++ java.lang.String getExceptionName ()
++ java.lang.String getFILENAME ()
++ java.lang.String getAnchor ()
++ java.lang.String getExpectionLines ()
++ java.lang.String getVersion ()
++ java.lang.String getUUID ()
++ void setLogId (int )
++ void setTIMESTAMP (Date )
++ void setLineNumber (Integer )
++ void setExceptionName (String )
++ void setFILENAME (String )
++ void setAnchor (String )
++ void setExpectionLines (String )
++ void setVersion (String )
++ void setUUID (String )
++ boolean equals (Object )
+# boolean canEqual (Object )
++ int hashCode ()
++ java.lang.String toString ()
++ void ExceptionEntity ()
+}
+class web.repligenvalidation.Entities.FolderPathEntity{
+- java.lang.String fileName
++ java.lang.String getFileName ()
++ void setFileName (String )
++ boolean equals (Object )
+# boolean canEqual (Object )
++ int hashCode ()
++ java.lang.String toString ()
++ void FolderPathEntity ()
+}
+class web.repligenvalidation.Controller.ValidationController{
+- web.repligenvalidation.Service.ValidationService validationService
++ void ValidationController (ValidationService )
++ java.lang.String getData ()
++ org.springframework.http.ResponseEntity<java.lang.String> addException (ExceptionEntity exceptionEntity, MultipartFile[] )
+}
+interface web.repligenvalidation.Repository.ValidationRepo {
+}
+interface org.springframework.data.jpa.repository.JpaRepository {
++ java.util.List<T> findAll ()
++ java.util.List<T> findAll (Sort )
++ java.util.List<T> findAllById (Iterable<ID> )
++ java.util.List<S> saveAll (Iterable<S> )
++ void flush ()
++ S saveAndFlush (S )
++ java.util.List<S> saveAllAndFlush (Iterable<S> )
++ void deleteInBatch (Iterable<T> )
++ void deleteAllInBatch (Iterable<T> )
++ void deleteAllByIdInBatch (Iterable<ID> )
++ void deleteAllInBatch ()
++ T getOne (ID )
++ T getById (ID )
++ java.util.List<S> findAll (Example<S> )
++ java.util.List<S> findAll (Example<S> example, Sort )
+}
+interface org.springframework.data.repository.PagingAndSortingRepository {
++ java.lang.Iterable<T> findAll (Sort )
++ org.springframework.data.domain.Page<T> findAll (Pageable )
+}
+interface org.springframework.data.repository.CrudRepository {
++ S save (S )
++ java.lang.Iterable<S> saveAll (Iterable<S> )
++ java.util.Optional<T> findById (ID )
++ boolean existsById (ID )
++ java.lang.Iterable<T> findAll ()
++ java.lang.Iterable<T> findAllById (Iterable<ID> )
++ long count ()
++ void deleteById (ID )
++ void delete (T )
++ void deleteAllById (Iterable<? extends ID> )
++ void deleteAll (Iterable<? extends T> )
++ void deleteAll ()
+}
+interface org.springframework.data.repository.Repository {
+}
+org.springframework.data.repository.Repository <|.. org.springframework.data.repository.CrudRepository
+org.springframework.data.repository.CrudRepository <|.. org.springframework.data.repository.PagingAndSortingRepository
+org.springframework.data.repository.PagingAndSortingRepository <|.. org.springframework.data.jpa.repository.JpaRepository
+interface org.springframework.data.repository.query.QueryByExampleExecutor {
++ java.util.Optional<S> findOne (Example<S> )
++ java.lang.Iterable<S> findAll (Example<S> )
++ java.lang.Iterable<S> findAll (Example<S> example, Sort )
++ org.springframework.data.domain.Page<S> findAll (Example<S> example, Pageable )
++ long count (Example<S> )
++ boolean exists (Example<S> )
+}
+org.springframework.data.repository.query.QueryByExampleExecutor <|.. org.springframework.data.jpa.repository.JpaRepository
+org.springframework.data.jpa.repository.JpaRepository <|.. web.repligenvalidation.Repository.ValidationRepo
+class web.repligenvalidation.RepligenValidationApplication{
++ void main (String[] )
+}
+class web.repligenvalidation.RepligenValidationApplicationTests{
+ void contextLoads ()
+}
+@enduml 

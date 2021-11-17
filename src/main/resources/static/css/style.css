@@ -29,19 +29,21 @@ input[type=file]{
     width : 300px;
     display: inline-block;
     margin-left : 200px;
+    font-family: "Times New Roman", Times, serif;
     font-size : 16px;
 }
 input[type=submit] {
   width: 20%;
-  height : 35px;
+  height : 40px;
   background-color: #4CAF50;
   color: white;
   padding: 5px 10px;
-  margin: 8px 225px;
+  margin: 6px 225px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size : 16px;
+  font-size : 20px;
+  font-family: "Times New Roman", Times, serif;
 }
 #progressBar{
     height : 30px;
@@ -55,7 +57,7 @@ input[type=submit] {
     width : 0%;
     height : 100%;
     max-width : 100%;
-    background-color : #266cbd;
+    background-color : #377cab;
     display : flex;
     align-items : center;
     font-weight : bold;
