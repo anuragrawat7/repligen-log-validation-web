@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>KFComm 2 Debugger</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" th:href = "@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap" rel="stylesheet">
+</head>
+<body id="body">
+    <div class="center">
+        <!--<div class="alert alert-success">
+            <strong>Success!</strong> This alert box could indicate a successful or positive action.
+        </div>-->
+        <h3 id = "heading">KFComm 2 Debugger</h3>
+        <form th:action="@{/api/validate/debug}" class = "form" id ="uploadform" method="POST" enctype="multipart/form-data">
+
+            <!--  For directly directory selection -->
+            <input type="file" id="folder" name="folder" webkitdirectory directory>
+            <!--  For multiple file selection
+            <input type="file" id="myFolder" name="fileName" multiple>-->
+            <br><br>
+            <input class="button" type="submit">
+
+        </form>
+
+        <div id="progressBar">
+            <div class="progress-bar-fill">
+                <span class="progress-bar-text">0%</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const uploadform = document.getElementById("uploadform");
+        const folder = document.getElementById("folder");
+        const progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
+        const progressBarText = progressBarFill.querySelector(".progress-bar-text");
+
+       uploadform.addEventListener("submit", uploadfile);
+
+       function uploadfile(e){
+        e.preventDefault();
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/api/validate/debug");
+        xhr.upload.addEventListener("progress", e=>{
+            console.log(e);
+            const percentage = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+            progressBarFill.style.width =  percentage.toFixed(2) + "%";
+            progressBarText.textContent =  percentage.toFixed(2) + "%";
+
+        });
+        <!--xhr.setRequestHeader("Content-Type", "multipart/form-data");-->
+        xhr.send(new FormData(uploadform));
+       }
+    </script>
+</body>
+</html>
