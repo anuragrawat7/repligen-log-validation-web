@@ -23,9 +23,10 @@
             <input type="file" id="folder" name="folder" webkitdirectory directory>
             <!--  For multiple file selection
             <input type="file" id="myFolder" name="fileName" multiple>-->
-            <br><br>
+            <br>
             <input class="button" type="submit">
-            <strong><p style="text-align:center">Note: select the log file</p></strong>
+            <br>
+            <strong><p id = "info"></p></strong>
         </form>
 
         <div id="progressBar">
@@ -35,8 +36,10 @@
         </div>
 
     </div>
-    <!-- Use JS for progress bar -->
+
     <script>
+
+        <!-- Use JS for progress bar -->
         const uploadform = document.getElementById("uploadform");
         const folder = document.getElementById("folder");
         const progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
@@ -47,6 +50,10 @@
        function uploadfile(e){
         e.preventDefault();
         const xhr = new XMLHttpRequest();
+        if(folder.files.length < 1){
+            alert('Please, first select log folder')
+        }
+        else {
         xhr.open("POST", "/api/validate/debug");
         xhr.upload.addEventListener("progress", e=>{
             console.log(e);
@@ -55,9 +62,12 @@
             progressBarText.textContent =  percentage.toFixed(2) + "%";
 
         });
-        <!--xhr.setRequestHeader("Content-Type", "multipart/form-data");-->
         xhr.send(new FormData(uploadform));
+        }
        }
     </script>
 </body>
 </html>
+
+<!--
+}-->

@@ -12,7 +12,7 @@
   height : 350px;
   background-color : white;
   border: 2px solid gray;
-  border-radius : 8px;
+  border-radius : 7px;
   padding: 20px;
 }
 /* For Title in Div */
@@ -21,7 +21,7 @@
     font-weight : bold;
     font-size : 30px;
     margin-top : 15px;
-    margin-bottom : 50px;
+    margin-bottom : 40px;
     font-family: 'Shippori Antique', sans-serif;
 }
 form{
@@ -47,6 +47,11 @@ input[type=submit] {
     font-size : 20px;
     font-family: "Times New Roman", Times, serif;
 }
+#info{
+    text-align : center;
+    font-size : 18px;
+    margin-bottom : 50px;
+}
 #progressBar{
     height : 30px;
     width : 500px;
@@ -63,10 +68,10 @@ input[type=submit] {
     display : flex;
     align-items : center;
     font-weight : bold;
-    transition : width 0.20s;
+    transition : width 0.10s;
 }
 .progress-bar-text{
-    margin-left : 235px;
+    margin-left : 220px;
     font-size : 18px;
     font-weight : bold;
 }
